@@ -29,7 +29,7 @@ public class CategoryService {
     }
 
     @Transactional(readOnly = true)
-    public List<CategoryResponse> getAll() {
+    public List<CategoryResponse> getAllCategories() {
         List<Category> categories = categoryRepository.findAll();
         return categories.stream().map(CategoryResponse::new).toList();
     }
@@ -71,7 +71,7 @@ public class CategoryService {
         }
     }
 
-    public Category update(CategoryRequest categoryRequest, Long categoryId) throws Exception {
+    public CategoryResponse update(CategoryRequest categoryRequest, Long categoryId) throws Exception {
         Category category = getById(categoryId);
 
         if (StringUtils.isNotBlank(categoryRequest.getName())) {
@@ -79,11 +79,13 @@ public class CategoryService {
         }
 
         log.info("Atualizando categoria " + category.getCategoryId());
-        return saveCategory(category);
+
+        Category savedCategory = saveCategory(category);
+        return new CategoryResponse(savedCategory);
     }
 
     @Transactional
-    public void deleteProduct(Long categoryId) {
+    public void deleteCategory(Long categoryId) {
         getById(categoryId);
         log.info("Deletando categoria de id {}", categoryId);
         categoryRepository.deleteById(categoryId);
