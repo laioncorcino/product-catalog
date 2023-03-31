@@ -1,0 +1,9 @@
+INSERT INTO tb_category(name) VALUES ('Livros');
+INSERT INTO tb_category(name) VALUES ('Computadores');
+INSERT INTO tb_category(name) VALUES ('Eletrônicos');
+INSERT INTO tb_category(name) VALUES ('Eletrodomésticos');
+INSERT INTO tb_category(name) VALUES ('Móveis');
+INSERT INTO tb_category(name) VALUES ('Esporte');
+INSERT INTO tb_category(name) VALUES ('Lazer');
+INSERT INTO tb_category(name) VALUES ('Saúde');
+INSERT INTO tb_category(name) VALUES ('Acessórios');
