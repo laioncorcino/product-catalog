@@ -1,5 +1,6 @@
 package com.corcino.productcatalog.api;
 
+import com.corcino.productcatalog.api.docs.CategoryDocs;
 import com.corcino.productcatalog.json.CategoryRequest;
 import com.corcino.productcatalog.json.CategoryResponse;
 import com.corcino.productcatalog.model.Category;
@@ -15,7 +16,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/categories")
+@RequestMapping("/api/v1/categories")
 public class CategoryController implements CategoryDocs {
 
     private final CategoryService categoryService;
@@ -44,9 +45,9 @@ public class CategoryController implements CategoryDocs {
         return ResponseEntity.created(uri).build();
     }
 
-    @PutMapping("/{categoryId}")
+    @PutMapping(value ="/{categoryId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CategoryResponse> update(@RequestBody @Valid CategoryRequest categoryRequest, @PathVariable Long categoryId) throws Exception {
-        CategoryResponse category = categoryService.update(categoryRequest, categoryId);
+        CategoryResponse category = categoryService.updateCategory(categoryRequest, categoryId);
         return ResponseEntity.ok(category);
     }
 

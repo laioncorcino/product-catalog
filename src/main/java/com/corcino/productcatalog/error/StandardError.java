@@ -15,7 +15,7 @@ public class StandardError {
     protected String errorMessage;
     protected String developerMessage;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     protected LocalDateTime dateTime;
 
 }

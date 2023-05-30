@@ -31,7 +31,9 @@ public class CategoryService {
     @Transactional(readOnly = true)
     public List<CategoryResponse> getAllCategories() {
         List<Category> categories = categoryRepository.findAll();
-        return categories.stream().map(CategoryResponse::new).toList();
+        return categories.stream()
+                .map(CategoryResponse::new)
+                .toList();
     }
 
     @Transactional(readOnly = true)
@@ -45,8 +47,8 @@ public class CategoryService {
         Optional<Category> category = categoryRepository.findById(categoryId);
 
         return category.orElseThrow(() -> {
-            log.error("Favorito de id {} nao encontrado", categoryId);
-            return new NotFoundException("Favorito nao encontrado");
+            log.error("Categoria de id {} nao encontrado", categoryId);
+            return new NotFoundException("Categoria nao encontrado");
         });
     }
 
@@ -71,7 +73,7 @@ public class CategoryService {
         }
     }
 
-    public CategoryResponse update(CategoryRequest categoryRequest, Long categoryId) throws Exception {
+    public CategoryResponse updateCategory(CategoryRequest categoryRequest, Long categoryId) throws Exception {
         Category category = getById(categoryId);
 
         if (StringUtils.isNotBlank(categoryRequest.getName())) {

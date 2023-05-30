@@ -24,50 +24,51 @@ public class ExceptionControllerHandler {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<StandardError> handleNotFound(NotFoundException notFoundException) {
-        return new ResponseEntity<>(StandardError.builder()
+        StandardError error = StandardError.builder()
                 .title("Object Not Found Exception. Check documentation.")
                 .status(HttpStatus.NOT_FOUND.value())
                 .errorMessage(notFoundException.getMessage())
                 .developerMessage(notFoundException.getClass().getName())
                 .dateTime(getDateTime())
-                .build(), HttpStatus.NOT_FOUND
-        );
+                .build();
+
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<StandardError> handleBadRequest(BadRequestException badRequestException) {
-        return new ResponseEntity<>(StandardError.builder()
+        StandardError error = StandardError.builder()
                 .title("Bad Request Exception.")
                 .status(HttpStatus.BAD_REQUEST.value())
                 .errorMessage(badRequestException.getMessage())
                 .developerMessage(badRequestException.getClass().getName())
                 .dateTime(getDateTime())
-                .build(), HttpStatus.BAD_REQUEST
-        );
+                .build();
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseEntity<StandardError> handleUnauthorizedException(UnauthorizedException unauthorizedException) {
-        return new ResponseEntity<>(StandardError.builder()
+        StandardError error = StandardError.builder()
                 .title("API access unauthorized.")
                 .status(HttpStatus.UNAUTHORIZED.value())
                 .errorMessage(unauthorizedException.getMessage())
                 .developerMessage(unauthorizedException.getClass().getName())
                 .dateTime(getDateTime())
-                .build(), HttpStatus.UNAUTHORIZED
-        );
+                .build();
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(ForbiddenException.class)
     public ResponseEntity<StandardError> handleForbiddenException(ForbiddenException forbiddenException) {
-        return new ResponseEntity<>(StandardError.builder()
+        StandardError error = StandardError.builder()
                 .title("API access forbidden.")
                 .status(HttpStatus.FORBIDDEN.value())
                 .errorMessage(forbiddenException.getMessage())
                 .developerMessage(forbiddenException.getClass().getName())
                 .dateTime(getDateTime())
-                .build(), HttpStatus.FORBIDDEN
-        );
+                .build();
+        return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -93,26 +94,26 @@ public class ExceptionControllerHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<StandardError> handleInternalException(Exception exception) {
-        return new ResponseEntity<>(StandardError.builder()
+        StandardError error = StandardError.builder()
                 .title("Internal error in server")
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .errorMessage("Internal error in server")
                 .developerMessage(exception.getClass().getName())
                 .dateTime(getDateTime())
-                .build(), HttpStatus.INTERNAL_SERVER_ERROR
-        );
+                .build();
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(Error.class)
-    public ResponseEntity<StandardError> handleInternalError(Error error) {
-        return new ResponseEntity<>(StandardError.builder()
+    public ResponseEntity<StandardError> handleInternalError(Error err) {
+        StandardError error = StandardError.builder()
                 .title("Internal error in server ")
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .errorMessage("Internal error in server")
-                .developerMessage(error.getClass().getName())
+                .developerMessage(err.getClass().getName())
                 .dateTime(getDateTime())
-                .build(), HttpStatus.INTERNAL_SERVER_ERROR
-        );
+                .build();
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     private LocalDateTime getDateTime() {
